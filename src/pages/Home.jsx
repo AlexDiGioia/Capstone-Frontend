@@ -1,7 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 
-const Home = () => {
-  return <div>Welcome to the Portfolio Home Page</div>;
-};
+function Home() {
+  return (
+    <Container className="text-center my-5">
+      <h1>Benvenuti nella vetrina di Erwin Hidalgo</h1>
+    </Container>
+  );
+}
 
 export default Home;

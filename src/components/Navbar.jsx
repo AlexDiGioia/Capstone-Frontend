@@ -1,49 +1,63 @@
-import React from 'react';
-import { Navbar, Nav, Dropdown, Container } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
-import { logout } from '../slices/userSlice';
-import { useNavigate } from 'react-router-dom';
 
-const NavBarComponent = () => {
-  const user = useSelector((state) => state.user);
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { clearUser } from '../slices/authSlice';
+
+function AppNavbar() {
+  const { user } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    dispatch(logout());
+    localStorage.removeItem('token');
+    dispatch(clearUser());
     navigate('/login');
   };
 
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
       <Container>
-        <Navbar.Brand href="#">Portfolio Logo</Navbar.Brand>
+        <Navbar.Brand as={NavLink} to="/">
+          Vetrina di Erwin Hidalgo
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link as={NavLink} to="/" >
+              Home
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/gallery">
+              Galleria
+            </Nav.Link>
+            <Nav.Link as={NavLink} to="/requests">
+              Richieste
+            </Nav.Link>
+            {user?.role === 'ADMIN' && (
+              <Nav.Link as={NavLink} to="/admin">
+                Amministratore
+              </Nav.Link>
+            )}
           </Nav>
-          <Dropdown align="end">
-            <Dropdown.Toggle variant="light" id="dropdown-basic">
-              <img
-                src={user.avatar}
-                alt="user avatar"
-                className="rounded-circle"
-                width="40"
-                height="40"
-              />{' '}
-              {user.name}
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item href="/user">User Page</Dropdown.Item>
-              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <Nav className="ms-auto">
+            {user ? (
+              <>
+                <Nav.Link as={NavLink} to="/user">Info</Nav.Link>
+                <Button variant="outline-light" onClick={handleLogout} className="ms-2">
+                  Logout
+                </Button>
+              </>
+            ) : (
+              <>
+                <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
+                <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
+              </>
+            )}
+          </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   );
-};
+}
 
-export default NavBarComponent;
+export default AppNavbar;
