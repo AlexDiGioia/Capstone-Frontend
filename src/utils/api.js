@@ -1,33 +1,27 @@
 import config from '../config';
 
 export const fetchWithAuth = async (endpoint, options = {}) => {
-  // Recupera il token dal localStorage
   const token = localStorage.getItem('token');
-  
-  // Aggiunge l'header Authorization se il token è presente
-  const headers = {
-    'Content-Type': 'application/json',
-    ...options.headers,
-  };
-  
+  const headers = { ...options.headers };
+
   if (token) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const url = `${config.apiBaseUrl}${endpoint}`;
+  // Verifica se l'endpoint è un URL completo. Se no, aggiungi la base URL
+  const url = endpoint.startsWith('http') ? endpoint : `${config.apiBaseUrl}${endpoint}`;
+
+  // Evita di impostare il Content-Type se il body è FormData
+  const isFormData = options.body instanceof FormData;
 
   const response = await fetch(url, {
     ...options,
-    headers,
+    headers: isFormData ? headers : { 'Content-Type': 'application/json', ...headers },
   });
 
   if (!response.ok) {
-    if (response.status === 401) {
-      throw new Error('Problemi col token! Per favore effettua di nuovo il login!');
-    } else {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Errore nella richiesta');
-    }
+    const errorData = await response.json();
+    throw new Error(errorData.message || 'Errore nella richiesta');
   }
 
   return response.json();
