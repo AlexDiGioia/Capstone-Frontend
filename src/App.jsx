@@ -12,11 +12,14 @@ import Register from './pages/Register';
 import AppNavbar from './components/Navbar';
 import Footer from './components/Footer';
 import { fetchWithAuth } from './utils/api';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './styles/global.scss';
+import './styles/custom-bootstrap.scss';
 
 function App() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation(); // Ottieni la posizione attuale
+  const location = useLocation(); 
   const { user } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -27,7 +30,7 @@ function App() {
           const data = await fetchWithAuth('/utenti/me');
           dispatch(setUser({ email: data.email, role: data.ruolo }));
         } catch (error) {
-          // Se il token non è valido o è scaduto, rimuovilo e reindirizza al login
+          
           localStorage.removeItem('token');
           dispatch(clearUser());
           if (location.pathname === '/requests') {
@@ -35,7 +38,7 @@ function App() {
           }
         }
       } else {
-        // Se non c'è il token e si sta tentando di accedere alla pagina delle richieste
+        
         if (location.pathname === '/requests') {
           navigate('/login');
         }

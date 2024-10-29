@@ -1,8 +1,10 @@
-
+import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../slices/authSlice';
+import styles from '../styles/Navbar.module.scss';
+
 
 function AppNavbar() {
   const { user } = useSelector((state) => state.auth);
@@ -16,25 +18,25 @@ function AppNavbar() {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="mb-4">
+    <Navbar className={styles.navbar} expand="lg" variant="dark">
       <Container>
-        <Navbar.Brand as={NavLink} to="/">
+        <Navbar.Brand as={NavLink} to="/" className={styles['navbar-brand']}>
           Vetrina di Erwin Hidalgo
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={NavLink} to="/" >
+            <Nav.Link as={NavLink} to="/" className={styles['nav-link']}>
               Home
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/gallery">
+            <Nav.Link as={NavLink} to="/gallery" className={styles['nav-link']}>
               Galleria
             </Nav.Link>
-            <Nav.Link as={NavLink} to="/requests">
+            <Nav.Link as={NavLink} to="/requests" className={styles['nav-link']}>
               Richieste
             </Nav.Link>
             {user?.role === 'ADMIN' && (
-              <Nav.Link as={NavLink} to="/admin">
+              <Nav.Link as={NavLink} to="/admin" className={`${styles['nav-link']} ${styles['register-btn']}`}>
                 Amministratore
               </Nav.Link>
             )}
@@ -42,15 +44,21 @@ function AppNavbar() {
           <Nav className="ms-auto">
             {user ? (
               <>
-                <Nav.Link as={NavLink} to="/user">Info</Nav.Link>
-                <Button variant="outline-light" onClick={handleLogout} className="ms-2">
+                <Nav.Link as={NavLink} to="/user" className={styles['nav-link']}>
+                  Info
+                </Nav.Link>
+                <Button variant="outline-light" onClick={handleLogout} className={`${styles['btn-logout']} ms-2`}>
                   Logout
                 </Button>
               </>
             ) : (
               <>
-                <Nav.Link as={NavLink} to="/login">Login</Nav.Link>
-                <Nav.Link as={NavLink} to="/register">Register</Nav.Link>
+                <Nav.Link as={NavLink} to="/login" className={styles['nav-link']}>
+                  Login
+                </Nav.Link>
+                <Nav.Link as={NavLink} to="/register" className={`${styles['nav-link']} ${styles['register-btn']}`}>
+                  Register
+                </Nav.Link>
               </>
             )}
           </Nav>
