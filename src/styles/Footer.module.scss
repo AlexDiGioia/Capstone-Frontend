@@ -1,0 +1,26 @@
+.footer {
+    background-image: url('/src/img/sfondo.png'); // Assicurati del percorso corretto
+    background-size: cover;
+    background-position: center;
+    padding: 2rem;
+    text-align: center;
+    color: #b0b3b8;
+
+    .socialIcons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1rem;
+
+        a {
+            color: #ff4655;
+            font-size: 2rem; // Dimensione delle icone
+
+            &:hover {
+                color: #e03b4c;
+                transform: scale(1.1); // Effetto hover con ingrandimento
+                transition: color 0.3s ease, transform 0.3s ease;
+            }
+        }
+    }
+}

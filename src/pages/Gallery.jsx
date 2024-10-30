@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
-import { fetchWithAuth } from '../utils/api'; // Assicurati di usare fetchWithAuth
+import Masonry from 'react-masonry-css';
+import { fetchWithAuth } from '../utils/api';
 import config from '../config';
+import styles from '../styles/Gallery.module.scss';
 
 function Gallery() {
   const [disegni, setDisegni] = useState([]);
@@ -10,7 +11,7 @@ function Gallery() {
   useEffect(() => {
     const fetchDisegni = async () => {
       try {
-        const data = await fetchWithAuth(`${config.apiBaseUrl}/disegni`); 
+        const data = await fetchWithAuth(`${config.apiBaseUrl}/disegni`);
         setDisegni(data);
       } catch (err) {
         setError('Errore nel recupero dei disegni. Per favore riprova.');
@@ -21,22 +22,31 @@ function Gallery() {
     fetchDisegni();
   }, []);
 
+  const breakpointColumnsObj = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1,
+  };
+
   return (
-    <Container>
+    <div className={styles.galleryContainer}>
       {error && <p>{error}</p>}
-      <Row>
+      <Masonry
+        breakpointCols={breakpointColumnsObj}
+        className={styles.myMasonryGrid}
+        columnClassName={styles.myMasonryGridColumn}
+      >
         {Array.isArray(disegni) && disegni.map((disegno) => (
-          <Col key={disegno.idDisegno} md={4} className="mb-4">
-            <Card>
-              <Card.Img variant="top" src={disegno.imageUrl} />
-              <Card.Body>
-                <Card.Title>{disegno.title}</Card.Title>
-              </Card.Body>
-            </Card>
-          </Col>
+          <div key={disegno.idDisegno} className={styles.galleryItem}>
+            <img src={disegno.imageUrl} alt={disegno.title} className={styles.galleryImage} />
+            <div className={styles.hoverOverlay}>
+              <span>{disegno.title}</span>
+            </div>
+          </div>
         ))}
-      </Row>
-    </Container>
+      </Masonry>
+    </div>
   );
 }
 

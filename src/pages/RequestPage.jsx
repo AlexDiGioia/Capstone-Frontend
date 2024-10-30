@@ -22,9 +22,9 @@ function RequestPage() {
 
   const fetchRichieste = async () => {
     try {
-      // Cambiato l'endpoint per ottenere le richieste solo dell'utente loggato
+      
       const data = await fetchWithAuth('/utenti/me/richieste');
-      setRichieste(data); // L'endpoint ora ritorna l'array di richieste dell'utente
+      setRichieste(data); 
     } catch (error) {
       setErrorMessage('Errore nel recupero delle richieste. Per favore riprova.');
       console.error(error);

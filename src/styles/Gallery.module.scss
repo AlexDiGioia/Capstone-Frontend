@@ -1,0 +1,53 @@
+.galleryContainer {
+    padding: 2rem;
+  }
+  
+  .myMasonryGrid {
+    display: flex;
+    margin-left: -1rem; /* Spaziatura negativa per evitare spazi tra colonne */
+    width: auto;
+  }
+  
+  .myMasonryGridColumn {
+    padding-left: 1rem; /* Spaziatura tra le colonne */
+    background-clip: padding-box;
+  }
+  
+  .galleryItem {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  .galleryImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease, border 0.3s ease;
+  }
+  
+  .hoverOverlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 25%; 
+    background-color: rgba(0, 0, 0, 0.6);
+    color: #ff4655;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    text-transform: capitalize;
+}
+  
+  .galleryItem:hover .galleryImage {
+    border: 3px solid #ff4655;
+    transform: scale(1.05);
+  }
+  
+  .galleryItem:hover .hoverOverlay {
+    opacity: 1;
+}
+  

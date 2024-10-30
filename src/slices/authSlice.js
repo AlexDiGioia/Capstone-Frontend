@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  user: null, // Qui memorizziamo le informazioni dell'utente loggato
+  user: null, 
 };
 
 const authSlice = createSlice({

@@ -1,0 +1,92 @@
+.homeContainer {
+    display: flex;
+    height: 70vh;
+    color: #f3f3f3;
+    position: relative;
+    flex-direction: row;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        height: auto;
+    }
+}
+
+.imageSection {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: -10vw;
+
+    .heroImage {
+        max-width: 100%;
+        height: auto;
+
+        @media (max-width: 768px) {
+            max-width: 80%;
+            margin-bottom: 1rem;
+        }
+    }
+}
+
+.textSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 2rem;
+    text-align: left;
+    
+
+    @media (max-width: 768px) {
+        padding-left: 0;
+        text-align: center;
+        align-items: center;
+    }
+    @media (min-width: 768px) and (max-width: 1200px) {
+        word-break: break-word;
+        padding-right: 10%;
+    }
+}
+
+.artistName {
+    font-size: 4rem;
+    font-weight: bold;
+    line-height: 1.2;
+    color: #f3f3f3;
+
+    @media (max-width: 768px) {
+        font-size: 2.5rem;
+    }
+}
+
+.subtitle {
+    font-size: 2rem;
+    color: #ff4655;
+
+    @media (max-width: 768px) {
+        font-size: 1.5rem;
+    }
+}
+
+.sideText {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 6rem;
+    font-weight: bold;
+    color: #ff4655;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+
+    @media (max-width: 768px) {
+        position: static;
+        writing-mode: horizontal-tb;
+        text-orientation: initial;
+        font-size: 3rem;
+        margin-top: 4rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+}

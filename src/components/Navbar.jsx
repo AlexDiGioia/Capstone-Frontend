@@ -3,8 +3,8 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearUser } from '../slices/authSlice';
+import logo from "../img/erwin logo.png";
 import styles from '../styles/Navbar.module.scss';
-
 
 function AppNavbar() {
   const { user } = useSelector((state) => state.auth);
@@ -21,7 +21,7 @@ function AppNavbar() {
     <Navbar className={styles.navbar} expand="lg" variant="dark">
       <Container>
         <Navbar.Brand as={NavLink} to="/" className={styles['navbar-brand']}>
-          Vetrina di Erwin Hidalgo
+          <img src={logo} alt="Erwin Logo" className={styles['logo']} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -36,7 +36,7 @@ function AppNavbar() {
               Richieste
             </Nav.Link>
             {user?.role === 'ADMIN' && (
-              <Nav.Link as={NavLink} to="/admin" className={`${styles['nav-link']} ${styles['register-btn']}`}>
+              <Nav.Link as={NavLink} to="/admin" className={styles['nav-link']}>
                 Amministratore
               </Nav.Link>
             )}
@@ -47,7 +47,7 @@ function AppNavbar() {
                 <Nav.Link as={NavLink} to="/user" className={styles['nav-link']}>
                   Info
                 </Nav.Link>
-                <Button variant="outline-light" onClick={handleLogout} className={`${styles['btn-logout']} ms-2`}>
+                <Button variant="outline-light" onClick={handleLogout} className="ms-2">
                   Logout
                 </Button>
               </>
@@ -56,9 +56,9 @@ function AppNavbar() {
                 <Nav.Link as={NavLink} to="/login" className={styles['nav-link']}>
                   Login
                 </Nav.Link>
-                <Nav.Link as={NavLink} to="/register" className={`${styles['nav-link']} ${styles['register-btn']}`}>
+                <Button as={NavLink} to="/register" className={styles['register-btn']}>
                   Register
-                </Nav.Link>
+                </Button>
               </>
             )}
           </Nav>

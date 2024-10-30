@@ -1,0 +1,23 @@
+.app-background {
+    background-image: url('/src/img/sfondo.png'); // Assicurati che questo percorso sia corretto
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+
+    .navbar, .footer {
+        background-image: url('/src/img/sfondo.png');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .content {
+        flex-grow: 1;
+        padding-top: 1rem; // Riduce lo spazio tra la navbar e il contenuto
+        padding-bottom: 1rem; // Riduce lo spazio tra il contenuto e il footer
+      }
+}

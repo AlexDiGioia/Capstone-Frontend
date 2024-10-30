@@ -1,90 +1,74 @@
-
 .navbar {
-    background-color: #1a1a1a !important; 
-    padding: 1rem 2rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-}
+    background-image: url('/src/img/sfondo.png'); // Assicurati che il percorso sia corretto
+    background-size: cover;
+    background-position: center;
+    padding: 1.5rem 2rem;
 
-.navbar-brand {
-    color: #ff4655 !important;
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 0.1rem;
-}
+    .navbar-brand {
+        color: #ff4655;
+        font-size: 2rem;
+        font-weight: bold;
+        letter-spacing: 0.1rem;
+        display: flex;
+        align-items: center;
 
-.nav-link {
-    color: #b0b3b8 !important; 
-    font-weight: 600; 
-    padding: 0.5rem 1.5rem; 
-    text-transform: uppercase;
-    transition: color 0.3s, transform 0.3s;
-    position: relative;
-    letter-spacing: 0.05rem;
-}
+        img {
+            display: inline-block;
+            max-height: 100px;
+            width: auto;
+            margin-right: 10px;
+            content: url("/src/img/erwin logo.png");
+        }
+    }
 
-.nav-link:hover, .nav-link.active {
-    color: #ff4655 !important; 
-    transform: translateY(-2px); 
-}
-
-.nav-link.active::after, .nav-link:hover::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 6px;
-    height: 6px;
-    background-color: #ff4655;
-    border-radius: 50%;
-}
-
-.register-btn {
-    background-color: #ff4655 !important;
-    color: #ffffff !important;
-    font-weight: bold;
-    padding: 0.5rem 1.5rem;
-    border-radius: 4px;
-    text-transform: uppercase;
-    font-size: 1rem;
-    border: none;
-    position: relative;
-    transition: background-color 0.3s, color 0.3s, transform 0.3s;
-    letter-spacing: 0.05rem;
+    .nav-link {
+        color: #b0b3b8;
+        font-weight: 600;
+        font-size: 1.5rem;
+        padding: 0.75rem 2.5rem; 
+        text-transform: uppercase;
+        transition: color 0.3s, transform 0.3s;
+        position: relative;
+        letter-spacing: 0.05rem;
+        margin-right: 1.5rem; 
     
-    // Bordo doppio simulato con pseudo-elementi
-    &::before, &::after {
-        content: "";
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        border: 2px solid #ffffff;
-        border-radius: 4px;
-        top: -4px;
-        left: -4px;
-        z-index: -1;
-        transition: all 0.3s;
+        &:hover,
+        &.active {
+            color: #ff4655; 
+            transform: translateY(-2px);
+    
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -2px;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 6px;
+                height: 6px;
+                background-color: #ff4655;
+                border-radius: 50%;
+            }
+        }
     }
+    
 
-    &::after {
-        top: 4px;
-        left: 4px;
-        right: -4px;
-        bottom: -4px;
-    }
+    .register-btn {
+        background-color: #ff4655;
+        color: #f3f3f3;
+        font-weight: bold;
+        font-size: 1rem;
+        padding: 0.6rem 1.4rem;
+        border-radius: 0;
+        box-shadow: none;
+        text-transform: uppercase;
+        transition: background-color 0.2s ease, transform 0.2s ease;
+        margin-left: 1rem;
+        display: inline-flex;
+        align-items: center;
 
-    &:hover {
-        background-color: #e03b4c !important;
-        color: #ffffff;
-    }
-
-    &:hover::before {
-        top: -6px;
-        left: -6px;
-    }
-
-    &:hover::after {
-        top: 6px;
-        left: 6px;
+        &:hover {
+            background-color: #e03b4c;
+            transform: translateY(-2px);
+        }
     }
 }
