@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { Container, Form, Button, Alert } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { Container, Form, Button, Alert } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
+import styles from "../styles/Register.module.scss";
 
 function Register() {
   const [formData, setFormData] = useState({
-    email: '',
-    password: '',
-    nome: '',
-    cognome: '',
-    username: ''
+    email: "",
+    password: "",
+    nome: "",
+    cognome: "",
+    username: "",
   });
   const [error, setError] = useState(null);
   const navigate = useNavigate();
@@ -16,37 +17,38 @@ function Register() {
   const handleChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
-        throw new Error('Registrazione fallita. Riprova.');
+        throw new Error("Registrazione fallita. Riprova.");
       }
 
-      navigate('/login');
+      navigate("/login");
     } catch (error) {
       setError(error.message);
     }
   };
 
   return (
-    <Container className="my-5">
+    <Container className={`my-5 ${styles.requestPageContainer}`}>
       <h2>Register</h2>
       {error && <Alert variant="danger">{error}</Alert>}
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3">
           <Form.Label>Nome</Form.Label>
           <Form.Control
+            className={styles.inputField}
             type="text"
             name="nome"
             value={formData.nome}
@@ -57,6 +59,7 @@ function Register() {
         <Form.Group className="mb-3">
           <Form.Label>Cognome</Form.Label>
           <Form.Control
+            className={styles.inputField}
             type="text"
             name="cognome"
             value={formData.cognome}
@@ -67,6 +70,7 @@ function Register() {
         <Form.Group className="mb-3">
           <Form.Label>Username</Form.Label>
           <Form.Control
+            className={styles.inputField}
             type="text"
             name="username"
             value={formData.username}
@@ -77,6 +81,7 @@ function Register() {
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
           <Form.Control
+            className={styles.inputField}
             type="email"
             name="email"
             value={formData.email}
@@ -87,6 +92,7 @@ function Register() {
         <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
           <Form.Control
+            className={styles.inputField}
             type="password"
             name="password"
             value={formData.password}
@@ -94,7 +100,9 @@ function Register() {
             required
           />
         </Form.Group>
-        <Button type="submit">Register</Button>
+        <Button className={styles.submitButton} type="submit">
+          Register
+        </Button>
       </Form>
     </Container>
   );

@@ -1,0 +1,44 @@
+.requestPageContainer {
+    color: #f6f9ff;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+.requestPageContainer .inputField,
+.requestPageContainer .selectField,
+.requestPageContainer textarea {
+    background-color: #1a1a1a;
+    color: #B0B3B8;
+    border: 1px solid #333;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+
+    &:focus {
+        background-color: #292929;
+        outline: none;
+        border-color: #ff4655;
+        color: #B0B3B8;
+    }
+}
+
+.requestPageContainer .checkboxField {
+    color: #ff4655;
+    font-weight: bold;
+}
+
+.requestPageContainer .submitButton {
+    background-color: #ff4655;
+    border: none;
+    color: #fefeff;
+    font-weight: bold;
+    padding: 0.6rem 1.4rem;
+    text-transform: uppercase;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+    border-radius: 4px;
+
+    &:hover {
+        background-color: #e03b4c;
+    }
+}

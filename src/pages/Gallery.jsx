@@ -7,6 +7,7 @@ import styles from '../styles/Gallery.module.scss';
 function Gallery() {
   const [disegni, setDisegni] = useState([]);
   const [error, setError] = useState(null);
+  const [selectedImage, setSelectedImage] = useState(null); // Stato per l'immagine selezionata
 
   useEffect(() => {
     const fetchDisegni = async () => {
@@ -29,6 +30,14 @@ function Gallery() {
     500: 1,
   };
 
+  const openImage = (imageUrl) => {
+    setSelectedImage(imageUrl);
+  };
+
+  const closeImage = () => {
+    setSelectedImage(null);
+  };
+
   return (
     <div className={styles.galleryContainer}>
       {error && <p>{error}</p>}
@@ -38,7 +47,11 @@ function Gallery() {
         columnClassName={styles.myMasonryGridColumn}
       >
         {Array.isArray(disegni) && disegni.map((disegno) => (
-          <div key={disegno.idDisegno} className={styles.galleryItem}>
+          <div 
+            key={disegno.idDisegno} 
+            className={styles.galleryItem} 
+            onClick={() => openImage(disegno.imageUrl)} 
+          >
             <img src={disegno.imageUrl} alt={disegno.title} className={styles.galleryImage} />
             <div className={styles.hoverOverlay}>
               <span>{disegno.title}</span>
@@ -46,6 +59,12 @@ function Gallery() {
           </div>
         ))}
       </Masonry>
+
+      {selectedImage && (
+        <div className={styles.modal} onClick={closeImage}>
+          <img src={selectedImage} alt="Selected" className={styles.modalImage} />
+        </div>
+      )}
     </div>
   );
 }
